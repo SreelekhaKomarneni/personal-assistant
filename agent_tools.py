@@ -23,8 +23,16 @@ def get_emails(priority=None, sender=None):
 
     return emails
 
-def get_calendar():
-    return load_json("data/calendar.json")
+def get_calendar(date=None):
+    events = load_json("data/calendar.json")
+
+    if date:
+        return [
+            event for event in events
+            if event.get("date") == date
+        ]
+
+    return events
 
 
 def get_tasks(status=None):

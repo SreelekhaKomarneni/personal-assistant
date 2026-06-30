@@ -1,7 +1,14 @@
 [
   {
     "title": "Sprint Planning",
+    "date": "2026-06-30",
     "start": "10:00 AM",
     "end": "11:00 AM"
+  },
+  {
+    "title": "Architecture Review",
+    "date": "2026-07-01",
+    "start": "2:00 PM",
+    "end": "3:00 PM"
   }
 ]

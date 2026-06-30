@@ -35,10 +35,15 @@ tools = [
         "type": "function",
         "function": {
             "name": "get_calendar",
-            "description": "Get the user's calendar events.",
+            "description": "Get the user's calendar events. Can optionally filter by date in YYYY-MM-DD format.",
             "parameters": {
                 "type": "object",
-                "properties": {},
+                "properties": {
+                    "date": {
+                        "type": "string",
+                        "description": "Date to filter calendar events, in YYYY-MM-DD format."
+                    }
+                },
                 "required": []
             },
         },
