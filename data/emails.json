@@ -1,0 +1,8 @@
+[
+  {
+    "from": "manager@company.com",
+    "subject": "Architecture diagram needed",
+    "body": "Can you send the architecture diagram before 3 PM?",
+    "priority": "high"
+  }
+]
