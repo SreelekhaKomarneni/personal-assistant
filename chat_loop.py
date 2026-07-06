@@ -1,4 +1,4 @@
-from agents.personal_assistant_agent import run_agent
+from agents.planner_agent import route_request
 from prompts import SYSTEM_PROMPT
 
 def start_chat():
@@ -23,7 +23,7 @@ def start_chat():
             "content": question
         })
 
-        answer = run_agent(messages)
+        answer = route_request(question)
 
         print("\nAssistant:\n")
         print(answer)
