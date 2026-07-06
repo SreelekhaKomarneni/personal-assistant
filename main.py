@@ -1,44 +1,8 @@
-import os
 import json
-from dotenv import load_dotenv
-from openai import OpenAI
 
-from tools.email_tools import get_emails
-from tools.calendar_tools import get_calendar
-from tools.task_tools import get_tasks
-from tools.memory_tools import get_memory
-
-from tool_registry import tools
+from services.llm_service import call_llm
 from tool_registry import available_functions
 
-load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-def choose_model(latest_user_question):
-    question = latest_user_question.lower()
-
-    complex_keywords = [
-        "analyze",
-        "prioritize",
-        "strategy",
-        "plan my week",
-        "compare",
-        "decision",
-        "summarize everything"
-    ]
-
-    if any(keyword in question for keyword in complex_keywords):
-        return "gpt-4.1-mini"
-    
-    return "gpt-4o-mini"
-
-def call_llm(messages, latest_user_question):
-    model=choose_model(latest_user_question)
-    return client.chat.completions.create(
-        model=model,
-        messages=messages,
-        tools=tools
-    )
 
 def run_agent(messages):
     latest_user_question = messages[-1]["content"]
