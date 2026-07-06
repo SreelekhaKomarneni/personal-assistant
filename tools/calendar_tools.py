@@ -1,3 +1,6 @@
+from agent_tools import load_json
+
+
 def get_calendar(date=None):
     events = load_json("data/calendar.json")
 

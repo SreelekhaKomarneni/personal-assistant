@@ -1,3 +1,8 @@
+from tools.email_tools import get_emails
+from tools.calendar_tools import get_calendar
+from tools.task_tools import get_tasks
+from tools.memory_tools import get_memory
+
 tools = [
     {
         "type": "function",

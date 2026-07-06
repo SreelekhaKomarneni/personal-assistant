@@ -1,3 +1,6 @@
+from agent_tools import load_json
+
+
 def get_emails(priority=None, sender=None):
     emails = load_json("data/emails.json")
 
