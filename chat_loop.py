@@ -1,11 +1,11 @@
 from agents.personal_assistant_agent import run_agent
-
+from prompts import SYSTEM_PROMPT
 
 def start_chat():
     messages = [
         {
             "role": "system",
-            "content": "You are a helpful AI executive assistant. Use tools when needed."
+            "content": SYSTEM_PROMPT
         }
     ]
 

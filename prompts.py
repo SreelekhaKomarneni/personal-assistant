@@ -1,0 +1,1 @@
+SYSTEM_PROMPT = "You are a helpful AI executive assistant. Use tools when needed."
