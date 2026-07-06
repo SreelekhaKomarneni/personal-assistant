@@ -2,6 +2,7 @@ from agents.email_agent import handle_email_request
 from agents.calendar_agent import handle_calendar_request
 from agents.task_agent import handle_task_request
 from agents.memory_agent import handle_memory_request
+from services.llm_service import call_llm
 
 
 def route_request(user_question):
@@ -23,4 +24,26 @@ def route_request(user_question):
     if not responses:
         return "Planner Agent could not decide which specialist agent to use."
 
-    return "\n\n".join(responses)
+    combined_context = "\n\n".join(responses)
+
+    messages = [
+        {
+            "role": "system",
+            "content": "You are a helpful AI executive assistant. Convert specialist agent results into a clear, concise final answer."
+        },
+        {
+            "role": "user",
+            "content": f"""
+    User question:
+    {user_question}
+
+    Specialist agent results:
+    {combined_context}
+
+    Give a natural final answer.
+    """
+        }
+    ]
+
+    llm_response = call_llm(messages, user_question)
+    return llm_response.choices[0].message.content
