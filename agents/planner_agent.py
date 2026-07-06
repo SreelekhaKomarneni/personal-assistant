@@ -1,3 +1,4 @@
+import json
 from agents.email_agent import handle_email_request
 from agents.calendar_agent import handle_calendar_request
 from agents.task_agent import handle_task_request
@@ -24,7 +25,7 @@ def route_request(user_question):
     if not responses:
         return "Planner Agent could not decide which specialist agent to use."
 
-    combined_context = "\n\n".join(responses)
+    combined_context = json.dumps(responses, indent=2)
 
     messages = [
         {
