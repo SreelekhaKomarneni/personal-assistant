@@ -1,29 +1,4 @@
-from agents.personal_assistant_agent import run_agent
+from chat_loop import start_chat
 
 if __name__ == "__main__":
-    messages = [
-        {
-            "role": "system",
-            "content": "You are a helpful AI executive assistant. Use tools when needed."
-        }
-    ]
-
-    print("AI Executive Assistant started. Type 'exit' to stop.\n")
-
-    while True:
-        question = input("You: ")
-
-        if question.lower() in ["exit", "quit"]:
-            print("Goodbye!")
-            break
-
-        messages.append({
-            "role": "user",
-            "content": question
-        })
-
-        answer = run_agent(messages)
-
-        print("\nAssistant:\n")
-        print(answer)
-        print()
+    start_chat()
