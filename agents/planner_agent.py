@@ -1,40 +1,30 @@
 import json
+from agents.llm_planner_agent import create_plan
 from agents.email_agent import handle_email_request
 from agents.calendar_agent import handle_calendar_request
 from agents.task_agent import handle_task_request
 from agents.memory_agent import handle_memory_request
 from services.llm_service import call_llm
 
+AGENT_MAP = {
+    "email_agent": handle_email_request,
+    "calendar_agent": handle_calendar_request,
+    "task_agent": handle_task_request,
+    "memory_agent": handle_memory_request,
+}
 
 def route_request(user_question):
-    question = user_question.lower()
+    plan = create_plan(user_question)
     responses = []
 
-    if "high priority" in question and "email" in question:
-        responses.append(
-            handle_email_request(priority="high")
-        )
+    for agent_call in plan.get("agents", []):
+        agent_name = agent_call["name"]
+        arguments = agent_call.get("arguments", {})
 
-    elif "email" in question or "manager" in question:
-        responses.append(
-            handle_email_request()
-        )
+        agent_function = AGENT_MAP[agent_name]
+        result = agent_function(**arguments)
 
-    if "meeting" in question or "calendar" in question or "today" in question:
-        responses.append(handle_calendar_request())
-
-    if "pending" in question and "task" in question:
-        responses.append(
-            handle_task_request(status="pending")
-        )
-
-    elif "task" in question or "focus" in question:
-        responses.append(
-            handle_task_request()
-        )
-
-    if "know about me" in question or "memory" in question or "preference" in question:
-        responses.append(handle_memory_request())
+        responses.append(result)
 
     if not responses:
         return "Planner Agent could not decide which specialist agent to use."

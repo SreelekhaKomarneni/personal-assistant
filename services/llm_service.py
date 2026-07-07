@@ -32,3 +32,11 @@ def call_llm(messages, latest_user_question):
         messages=messages,
         tools=tools
     )
+
+def call_planner_llm(messages, latest_user_question):
+    model = choose_model(latest_user_question)
+
+    return client.chat.completions.create(
+        model=model,
+        messages=messages
+    )
