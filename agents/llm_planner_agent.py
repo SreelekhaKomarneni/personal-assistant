@@ -39,4 +39,7 @@ Return ONLY valid JSON in this format:
     response = call_planner_llm(messages, user_question)
     content = response.choices[0].message.content
 
+    if content is None:
+        raise ValueError("Planner returned no text content.")
+
     return json.loads(content)

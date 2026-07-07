@@ -38,5 +38,6 @@ def call_planner_llm(messages, latest_user_question):
 
     return client.chat.completions.create(
         model=model,
-        messages=messages
+        messages=messages,
+        response_format={"type": "json_object"}
     )
