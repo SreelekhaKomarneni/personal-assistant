@@ -15,6 +15,10 @@ AGENT_MAP = {
 
 def route_request(user_question):
     plan = create_plan(user_question)
+
+    print("\nPlanner created this plan:\n")
+    print(json.dumps(plan, indent=2))
+
     responses = []
 
     for agent_call in plan.get("agents", []):
